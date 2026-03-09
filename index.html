@@ -388,53 +388,6 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────────────
-// NAVIGATION & URL ROUTING
-// All pages use clean paths — no hashes anywhere.
-// To add a new page: add it to PAGE_URLS and getPageFromURL below,
-// create a <div class="page" id="page-yourname"> section in the HTML,
-// and call navigate('yourname') from wherever you link to it.
-// ─────────────────────────────────────────────────────────────────────
-var PAGE_URLS = {
-  'home': '/',
-  'works': '/Works',
-  'mission': '/Mission',
-  'blog': '/Blog',
-  'work-nexusnet': '/NexusNet',
-  'work-meridian': '/Meridian',
-  'work-signal': '/Signal',
-  'work-atlas': '/Atlas',
-  'work-fieldwork': '/Fieldwork',
-  'blog-networking': '/Blog/Networking',
-  'blog-trust': '/Blog/Trust',
-  'blog-privacy': '/Blog/Privacy',
-  'blog-interviews': '/Blog/Interviews',
-  'blog-culture': '/Blog/Culture',
-  'blog-metrics': '/Blog/Metrics',
-  'blog-2030': '/Blog/2030'
-};
-
-function getPageFromURL() {
-  var path = location.pathname.replace(/[/]+$/, '').toLowerCase();
-  if (path === '' || path === '/')          return 'home';
-  if (path === '/works')                    return 'works';
-  if (path === '/mission')                  return 'mission';
-  if (path === '/blog')                     return 'blog';
-  if (path === '/nexusnet')                 return 'work-nexusnet';
-  if (path === '/meridian')                 return 'work-meridian';
-  if (path === '/signal')                   return 'work-signal';
-  if (path === '/atlas')                    return 'work-atlas';
-  if (path === '/fieldwork')                return 'work-fieldwork';
-  if (path === '/blog/networking')          return 'blog-networking';
-  if (path === '/blog/trust')               return 'blog-trust';
-  if (path === '/blog/privacy')             return 'blog-privacy';
-  if (path === '/blog/interviews')          return 'blog-interviews';
-  if (path === '/blog/culture')             return 'blog-culture';
-  if (path === '/blog/metrics')             return 'blog-metrics';
-  if (path === '/blog/2030')                return 'blog-2030';
-  return 'home';
-}
-
 function navigate(pageName, addToHistory) {
   if (addToHistory === undefined) addToHistory = true;
   var pages = document.querySelectorAll('.page');
@@ -448,10 +401,7 @@ function navigate(pageName, addToHistory) {
   var navEl = document.getElementById('nav-' + root);
   if (navEl) navEl.classList.add('active');
   if (addToHistory) {
-    try {
-      var url = (PAGE_URLS[pageName] !== undefined) ? PAGE_URLS[pageName] : ('/' + pageName);
-      history.pushState({ page: pageName }, '', url);
-    } catch(e) {}
+    try { history.pushState({ page: pageName }, '', '#' + pageName); } catch(e) {}
   }
   window.scrollTo(0, 0);
   setTimeout(initReveal, 80);
@@ -459,19 +409,14 @@ function navigate(pageName, addToHistory) {
 }
 
 window.addEventListener('popstate', function(e) {
-  var page = (e.state && e.state.page) ? e.state.page : getPageFromURL();
+  var page = (e.state && e.state.page) ? e.state.page : (location.hash.replace('#','') || 'home');
   navigate(page, false);
 });
 
 (function() {
-  try {
-    var page = getPageFromURL();
-    var url = (PAGE_URLS[page] !== undefined) ? PAGE_URLS[page] : '/';
-    history.replaceState({ page: page }, '', url);
-    navigate(page, false);
-  } catch(e) {
-    navigate('home', false);
-  }
+  var page = location.hash.replace('#', '') || 'home';
+  try { history.replaceState({ page: page }, '', page === 'home' ? location.pathname : '#' + page); } catch(e) {}
+  navigate(page, false);
 })();
 
 var cursor = document.getElementById('cursor');
@@ -518,4 +463,6 @@ function initReveal() {
   for (var i = 0; i < els.length; i++) obs.observe(els[i]);
 }
 initReveal();
-t 
+</script>
+</body>
+</html>
