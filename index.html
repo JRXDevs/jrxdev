@@ -3,12 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE TITLE — Shown in browser tab
+     ═══════════════════════════════════════════════════════════ -->
 <title>JRXDev — Human-Focused Software</title>
+<!-- ═══════════════════════════════════════════════════════════
+     FAVICON — Replace href with your final logo file
+     e.g. href="/favicon.png" type="image/png"
+     ═══════════════════════════════════════════════════════════ -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M5 5h8v3H8v16h5v3H5V5zM19 5h8v21h-8v-3h5V8h-5V5zM13 13h6v6h-6z' fill='%23fff'/></svg>">
+<!-- ═══════════════════════════════════════════════════════════
+     FONT — Neue Haas Grotesk Display Pro loaded from cdnfonts
+     If self-hosting the font, replace this link tag
+     ═══════════════════════════════════════════════════════════ -->
 <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL COLORS — background:#000 (black), color:#fff (white)
+   To change the site palette, edit these two values
+   ═══════════════════════════════════════════════════════════ */
 body { font-family:'Neue Haas Grotesk Display Pro',sans-serif; background:#000; color:#fff; overflow-x:hidden; cursor:none; }
 
 .cursor { position:fixed; width:12px; height:12px; background:#fff; border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .2s,height .2s; mix-blend-mode:difference; }
@@ -171,11 +186,16 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 
 <nav id="mainNav">
   <a class="nav-logo" onclick="navigate('home')">
-    <div class="logo-mark">
+    <!-- ═══════════════════════════════════════════════════════════
+     LOGO MARK — Replace the <svg> below with your final logo
+     e.g. <img src="/logo.png" width="22" height="22" alt="JRXDev">
+     ═══════════════════════════════════════════════════════════ -->
+<div class="logo-mark">
       <svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
         <path d="M4 4h6v2H6v12h4v2H4V4zM14 4h6v16h-6v-2h4V6h-4V4zM10 10h4v4h-4z"/>
       </svg>
     </div>
+    <!-- COMPANY NAME in nav — edit text below -->
     <span class="logo-text">JRXDev</span>
   </a>
   <ul class="nav-links">
@@ -189,10 +209,15 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
   <section class="home-hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Software Development Studio</p>
+      <!-- ═══════════════════════════════════════════════════════════
+     HERO HEADLINE — Main homepage headline
+     ═══════════════════════════════════════════════════════════ -->
       <h1 class="hero-headline"><em>Human-focused</em><br>software for<br>a better world.</h1>
+      <!-- HERO BIO — Short company description on homepage -->
       <p class="hero-bio">JRXDev is a software development company building the next generation of professional networking tools. We create technology that centers people — not algorithms — to foster genuine connection, opportunity, and societal progress.</p>
     </div>
     <div class="hero-right">
+      <!-- HOMEPAGE STATS — Edit the 3 numbers and labels below -->
       <div><div class="stat-number">01</div><div class="stat-label">Active product in development</div></div>
       <div><div class="stat-number">∞</div><div class="stat-label">Commitment to human impact</div></div>
       <div><div class="stat-number">2026</div><div class="stat-label">Founded with purpose</div></div>
@@ -363,6 +388,53 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 </div>
 
 <script>
+// ─────────────────────────────────────────────────────────────────────
+// NAVIGATION & URL ROUTING
+// All pages use clean paths — no hashes anywhere.
+// To add a new page: add it to PAGE_URLS and getPageFromURL below,
+// create a <div class="page" id="page-yourname"> section in the HTML,
+// and call navigate('yourname') from wherever you link to it.
+// ─────────────────────────────────────────────────────────────────────
+var PAGE_URLS = {
+  'home': '/',
+  'works': '/Works',
+  'mission': '/Mission',
+  'blog': '/Blog',
+  'work-nexusnet': '/NexusNet',
+  'work-meridian': '/Meridian',
+  'work-signal': '/Signal',
+  'work-atlas': '/Atlas',
+  'work-fieldwork': '/Fieldwork',
+  'blog-networking': '/Blog/Networking',
+  'blog-trust': '/Blog/Trust',
+  'blog-privacy': '/Blog/Privacy',
+  'blog-interviews': '/Blog/Interviews',
+  'blog-culture': '/Blog/Culture',
+  'blog-metrics': '/Blog/Metrics',
+  'blog-2030': '/Blog/2030'
+};
+
+function getPageFromURL() {
+  var path = location.pathname.replace(/[/]+$/, '').toLowerCase();
+  if (path === '' || path === '/')          return 'home';
+  if (path === '/works')                    return 'works';
+  if (path === '/mission')                  return 'mission';
+  if (path === '/blog')                     return 'blog';
+  if (path === '/nexusnet')                 return 'work-nexusnet';
+  if (path === '/meridian')                 return 'work-meridian';
+  if (path === '/signal')                   return 'work-signal';
+  if (path === '/atlas')                    return 'work-atlas';
+  if (path === '/fieldwork')                return 'work-fieldwork';
+  if (path === '/blog/networking')          return 'blog-networking';
+  if (path === '/blog/trust')               return 'blog-trust';
+  if (path === '/blog/privacy')             return 'blog-privacy';
+  if (path === '/blog/interviews')          return 'blog-interviews';
+  if (path === '/blog/culture')             return 'blog-culture';
+  if (path === '/blog/metrics')             return 'blog-metrics';
+  if (path === '/blog/2030')                return 'blog-2030';
+  return 'home';
+}
+
 function navigate(pageName, addToHistory) {
   if (addToHistory === undefined) addToHistory = true;
   var pages = document.querySelectorAll('.page');
@@ -376,7 +448,10 @@ function navigate(pageName, addToHistory) {
   var navEl = document.getElementById('nav-' + root);
   if (navEl) navEl.classList.add('active');
   if (addToHistory) {
-    try { history.pushState({ page: pageName }, '', '#' + pageName); } catch(e) {}
+    try {
+      var url = (PAGE_URLS[pageName] !== undefined) ? PAGE_URLS[pageName] : ('/' + pageName);
+      history.pushState({ page: pageName }, '', url);
+    } catch(e) {}
   }
   window.scrollTo(0, 0);
   setTimeout(initReveal, 80);
@@ -384,15 +459,16 @@ function navigate(pageName, addToHistory) {
 }
 
 window.addEventListener('popstate', function(e) {
-  var page = (e.state && e.state.page) ? e.state.page : 'home';
+  var page = (e.state && e.state.page) ? e.state.page : getPageFromURL();
   navigate(page, false);
 });
 
 (function() {
   try {
-    var hash = location.hash.replace('#', '') || 'home';
-    history.replaceState({ page: hash }, '', '#' + hash);
-    navigate(hash, false);
+    var page = getPageFromURL();
+    var url = (PAGE_URLS[page] !== undefined) ? PAGE_URLS[page] : '/';
+    history.replaceState({ page: page }, '', url);
+    navigate(page, false);
   } catch(e) {
     navigate('home', false);
   }
@@ -442,6 +518,4 @@ function initReveal() {
   for (var i = 0; i < els.length; i++) obs.observe(els[i]);
 }
 initReveal();
-</script>
-</body>
-</html>
+t 
