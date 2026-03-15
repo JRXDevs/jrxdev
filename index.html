@@ -3,57 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <!-- ═══════════════════════════════════════════════════════════
-     PAGE TITLE — Shown in browser tab
+     PAGE TITLE — shown in browser tab
      ═══════════════════════════════════════════════════════════ -->
-<title>JRXDev — Developing Software That Helps</title>
+<title>JRXDev — Human-Focused Software</title>
+
 <!-- ═══════════════════════════════════════════════════════════
-     FAVICON — Replace href with your final logo file
-     e.g. href="/favicon.png" type="image/png"
+     FAVICON — file must sit in the same folder as index.html
      ═══════════════════════════════════════════════════════════ -->
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" href="android-chrome-512x512.png">
+
 <!-- ═══════════════════════════════════════════════════════════
-     FONT — Neue Haas Grotesk Display Pro loaded from cdnfonts
+     FONT — Neue Haas Grotesk Display Pro via cdnfonts
      If self-hosting the font, replace this link tag
      ═══════════════════════════════════════════════════════════ -->
 <link href="https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro" rel="stylesheet">
+
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
+
 /* ═══════════════════════════════════════════════════════════
    GLOBAL COLORS — background:#000 (black), color:#fff (white)
    To change the site palette, edit these two values
    ═══════════════════════════════════════════════════════════ */
-body { font-family:'Neue Haas Grotesk Display Pro',sans-serif; background:#000; color:#fff; overflow-x:hidden; cursor:none; }
+body {
+  font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  cursor: none;
+}
 
+/* ── CURSOR ── */
 .cursor { position:fixed; width:12px; height:12px; background:#fff; border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .2s,height .2s; mix-blend-mode:difference; }
 .cursor-follower { position:fixed; width:40px; height:40px; background:#fff; border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .2s,height .2s; mix-blend-mode:difference; opacity:.15; }
 
+/* ── PAGES ── */
 .page { display:none; min-height:100vh; }
 .page.active { display:block; animation:fadeUp .5s cubic-bezier(.25,.46,.45,.94) forwards; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
-nav { position:fixed; top:0; left:0; right:0; z-index:1000; display:flex; align-items:center; justify-content:space-between; padding:24px 48px; background:rgba(0,0,0,.97); backdrop-filter:blur(12px); border-bottom:1px solid transparent; transition:border-color .3s; }
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 48px;
+  background:rgba(0,0,0,.97); backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent; transition:border-color .3s;
+}
 nav.scrolled { border-bottom-color:rgba(255,255,255,.2); }
+
+/* ═══════════════════════════════════════════════════════════
+   LOGO MARK — no background so the PNG sits on the black nav
+   ═══════════════════════════════════════════════════════════ */
 .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:#fff; cursor:pointer; }
-.logo-mark { width:40px; height:40px; background:#fff; display:flex; align-items:center; justify-content:center; transition:transform .35s cubic-bezier(.25,.46,.45,.94); }
+.logo-mark {
+  width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+  overflow:hidden;
+}
 .logo-mark:hover { transform:rotate(90deg); }
+.logo-mark img { width:40px; height:40px; object-fit:cover; display:block; }
+
+/* ═══════════════════════════════════════════════════════════
+   COMPANY NAME in nav
+   ═══════════════════════════════════════════════════════════ */
 .logo-text { font-size:15px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+
 .nav-links { display:flex; align-items:center; list-style:none; }
 .nav-links li a { text-decoration:none; color:#fff; font-size:13px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; padding:8px 20px; position:relative; cursor:pointer; display:block; }
 .nav-links li a::after { content:''; position:absolute; bottom:4px; left:20px; right:20px; height:1px; background:#fff; transform:scaleX(0); transform-origin:left; transition:transform .3s cubic-bezier(.25,.46,.45,.94); }
 .nav-links li a:hover::after, .nav-links li a.active::after { transform:scaleX(1); }
 .nav-links li a.active { font-weight:700; }
 
+/* ── FOOTER ── */
 footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:space-between; }
 .footer-copy { font-size:12px; letter-spacing:.08em; color:#fff; }
 .footer-links { display:flex; gap:32px; }
 .footer-links a { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#fff; text-decoration:none; transition:opacity .2s; cursor:pointer; }
 .footer-links a:hover { opacity:.6; }
 
+/* ── CONTACT SECTION ── */
 .contact-section { padding:120px 48px; display:flex; flex-direction:column; align-items:center; text-align:center; }
-.contact-label { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:32px; }
+.contact-label { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:32px; opacity:.6; }
 .contact-headline { font-size:clamp(40px,5vw,72px); font-weight:800; letter-spacing:-.03em; line-height:1.05; margin-bottom:56px; max-width:700px; }
+
+/* ═══════════════════════════════════════════════════════════
+   CONTACT BUTTON — update email address if it changes
+   ═══════════════════════════════════════════════════════════ */
 .contact-btn { display:inline-flex; align-items:center; gap:16px; background:#fff; color:#000; text-decoration:none; padding:20px 40px; font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-family:'Neue Haas Grotesk Display Pro',sans-serif; border:none; cursor:pointer; position:relative; overflow:hidden; transition:color .3s; }
 .contact-btn::before { content:''; position:absolute; inset:0; background:#000; transform:translateX(-100%); transition:transform .4s cubic-bezier(.25,.46,.45,.94); }
 .contact-btn:hover::before { transform:translateX(0); }
@@ -62,34 +102,50 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 .btn-arrow { transition:transform .3s; }
 .contact-btn:hover .btn-arrow { transform:translateX(4px); }
 
+/* ── REVEAL ── */
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
+/* ── MARQUEE ── */
 .marquee-section { border-top:1px solid rgba(255,255,255,.2); border-bottom:1px solid rgba(255,255,255,.2); overflow:hidden; padding:20px 0; white-space:nowrap; }
 .marquee-track { display:inline-flex; animation:marquee 22s linear infinite; }
 .marquee-item { font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; padding:0 48px; display:flex; align-items:center; gap:48px; }
 .marquee-dot { width:5px; height:5px; background:#fff; border-radius:50%; flex-shrink:0; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
+/* ── HOME HERO ── */
 .home-hero { padding:140px 48px 80px; display:grid; grid-template-columns:1fr 1fr; min-height:100vh; align-items:center; }
 .hero-left { padding-right:80px; }
 .hero-eyebrow { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:32px; display:flex; align-items:center; gap:12px; opacity:0; animation:slideUp .8s .2s forwards; }
 .hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:#fff; }
+
+/* ═══════════════════════════════════════════════════════════
+   HERO HEADLINE — main homepage headline
+   ═══════════════════════════════════════════════════════════ */
 .hero-headline { font-size:clamp(48px,5.5vw,88px); font-weight:800; line-height:1.0; letter-spacing:-.03em; margin-bottom:40px; opacity:0; animation:slideUp .8s .35s forwards; }
 .hero-headline em { font-style:normal; position:relative; display:inline-block; }
 .hero-headline em::after { content:''; position:absolute; bottom:4px; left:0; right:0; height:3px; background:#fff; transform:scaleX(0); transform-origin:left; animation:lineReveal .6s 1.1s forwards; }
 @keyframes lineReveal { to{transform:scaleX(1)} }
-.hero-bio { font-size:16px; line-height:1.75; color:#fff; max-width:480px; opacity:0; animation:slideUp .8s .5s forwards; }
+
+/* ═══════════════════════════════════════════════════════════
+   HERO BIO — short company description on homepage
+   ═══════════════════════════════════════════════════════════ */
+.hero-bio { font-size:16px; line-height:1.75; color:#fff; max-width:480px; opacity:0; animation:slideUp .8s .5s forwards; opacity:.85; }
 @keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ═══════════════════════════════════════════════════════════
+   HOMEPAGE STATS — edit the numbers and labels
+   ═══════════════════════════════════════════════════════════ */
 .hero-right { border-left:1px solid rgba(255,255,255,.2); padding-left:80px; display:flex; flex-direction:column; gap:48px; opacity:0; animation:slideUp .8s .65s forwards; }
 .stat-number { font-size:64px; font-weight:800; letter-spacing:-.04em; line-height:1; }
 .stat-label { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#fff; margin-top:8px; opacity:.6; }
 
+/* ── WORKING ON ── */
 .working-on { padding:120px 48px; background:#0d0d0d; color:#fff; }
 .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:80px; border-bottom:1px solid rgba(255,255,255,.2); padding-bottom:32px; }
 .section-title { font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.5; }
 .section-heading { font-size:clamp(36px,4vw,60px); font-weight:800; letter-spacing:-.02em; }
-.projects-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,.15); }
+.projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.15); }
 .project-card { background:#0d0d0d; padding:48px 40px; transition:background .3s; cursor:pointer; }
 .project-card:hover { background:#1a1a1a; }
 .project-number { font-size:11px; letter-spacing:.16em; color:rgba(255,255,255,.4); margin-bottom:32px; }
@@ -97,11 +153,13 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 .project-desc { font-size:14px; line-height:1.7; color:rgba(255,255,255,.8); }
 .project-tag { display:inline-block; margin-top:28px; font-size:10px; letter-spacing:.18em; text-transform:uppercase; border:1px solid rgba(255,255,255,.3); padding:6px 14px; color:#fff; }
 
+/* ── PAGE HERO ── */
 .page-hero { padding:160px 48px 80px; border-bottom:1px solid rgba(255,255,255,.2); }
 .page-hero-label { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:24px; display:flex; align-items:center; gap:12px; opacity:.6; }
 .page-hero-label::before { content:''; display:inline-block; width:24px; height:1px; background:#fff; }
 .page-hero-title { font-size:clamp(56px,7vw,108px); font-weight:800; letter-spacing:-.04em; line-height:.92; }
 
+/* ── WORKS LIST ── */
 .works-list { padding:0 48px; }
 .work-item { display:grid; grid-template-columns:80px 1fr 200px 120px; align-items:center; gap:40px; padding:40px 0; border-bottom:1px solid rgba(255,255,255,.2); cursor:pointer; transition:padding-left .3s cubic-bezier(.25,.46,.45,.94); position:relative; }
 .work-item::before { content:''; position:absolute; left:-48px; top:0; bottom:0; width:0; background:#fff; transition:width .3s cubic-bezier(.25,.46,.45,.94); }
@@ -113,6 +171,7 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 .work-category { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#fff; border:1px solid rgba(255,255,255,.3); padding:6px 14px; display:inline-block; }
 .work-year { font-size:13px; color:#fff; text-align:right; opacity:.5; }
 
+/* ── WORK DETAIL ── */
 .detail-hero { padding:160px 48px 0; }
 .detail-back { display:inline-flex; align-items:center; gap:10px; margin-bottom:48px; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#fff; cursor:pointer; transition:opacity .2s; border:none; background:none; font-family:'Neue Haas Grotesk Display Pro',sans-serif; opacity:.7; }
 .detail-back:hover { opacity:1; }
@@ -129,17 +188,18 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 .detail-body { padding:0 48px 120px; max-width:860px; }
 .detail-section-label { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#fff; opacity:.5; margin-bottom:20px; margin-top:56px; }
 .detail-section-label:first-child { margin-top:0; }
-.detail-section-text { font-size:17px; line-height:1.75; color:#fff; margin-bottom:24px; }
+.detail-section-text { font-size:17px; line-height:1.75; color:#fff; margin-bottom:24px; opacity:.88; }
 .detail-section-h { font-size:28px; font-weight:800; letter-spacing:-.02em; margin-bottom:20px; }
 .detail-tags { display:flex; flex-wrap:wrap; gap:10px; margin-top:48px; }
 .detail-tag { font-size:11px; letter-spacing:.14em; text-transform:uppercase; border:1px solid rgba(255,255,255,.3); padding:8px 18px; color:#fff; }
 
+/* ── MISSION ── */
 .mission-hero { padding:160px 48px 80px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; border-bottom:1px solid rgba(255,255,255,.2); }
 .mission-content { padding:80px 48px; }
 .mission-block { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.2); margin-bottom:1px; }
 .mission-cell { background:#000; padding:56px 48px; }
 .mission-cell-label { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#fff; opacity:.5; margin-bottom:20px; }
-.mission-cell-text { font-size:17px; line-height:1.7; color:#fff; }
+.mission-cell-text { font-size:17px; line-height:1.7; color:#fff; opacity:.85; }
 .mission-cell-title { font-size:30px; font-weight:800; letter-spacing:-.02em; margin-bottom:16px; }
 .values-section { padding:80px 48px; background:#0a0a0a; color:#fff; }
 .values-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.15); margin-top:60px; }
@@ -148,30 +208,24 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 .value-title { font-size:20px; font-weight:700; margin-bottom:14px; letter-spacing:-.01em; }
 .value-text { font-size:14px; line-height:1.65; color:#fff; opacity:.7; }
 
+/* ── BLOG ── */
 .blog-grid { padding:0 48px; }
-.blog-featured { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid rgba(255,255,255,.2); cursor:pointer; }
-.blog-featured-content { padding:64px 64px 64px 0; transition:opacity .2s; }
-.blog-featured:hover .blog-featured-content { opacity:.8; }
-.blog-featured-image { background:#0d0d0d; display:flex; align-items:center; justify-content:center; min-height:400px; position:relative; overflow:hidden; }
-.blog-featured-image::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(255,255,255,.03) 30px,rgba(255,255,255,.03) 31px); }
-.blog-featured-image-text { font-size:80px; font-weight:800; color:rgba(255,255,255,.08); letter-spacing:-.05em; z-index:1; position:relative; }
-.blog-tag { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:20px; display:flex; align-items:center; gap:12px; opacity:.7; }
-.blog-tag::before { content:''; display:inline-block; width:20px; height:1px; background:#fff; }
-.blog-post-title { font-size:clamp(28px,3vw,44px); font-weight:800; letter-spacing:-.03em; line-height:1.1; margin-bottom:20px; }
-.blog-post-excerpt { font-size:15px; line-height:1.7; color:#fff; opacity:.7; margin-bottom:32px; max-width:460px; }
-.blog-meta { display:flex; align-items:center; gap:24px; font-size:12px; color:#fff; opacity:.5; letter-spacing:.08em; }
-.blog-posts-list { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:rgba(255,255,255,.15); margin-top:1px; }
-.blog-post-card { background:#000; padding:48px 40px; cursor:pointer; transition:background .2s; }
+.blog-posts-list { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,.15); margin-top:1px; }
+.blog-post-card { background:#000; padding:64px 48px; cursor:pointer; transition:background .2s; }
 .blog-post-card:hover { background:#0d0d0d; }
-.blog-card-title { font-size:22px; font-weight:700; letter-spacing:-.02em; line-height:1.2; margin-bottom:14px; margin-top:12px; }
-.blog-card-excerpt { font-size:13px; line-height:1.65; color:#fff; opacity:.6; margin-bottom:24px; }
+.blog-tag { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:20px; display:flex; align-items:center; gap:12px; opacity:.6; }
+.blog-tag::before { content:''; display:inline-block; width:20px; height:1px; background:#fff; }
+.blog-card-title { font-size:28px; font-weight:700; letter-spacing:-.02em; line-height:1.1; margin-bottom:16px; margin-top:12px; }
+.blog-card-excerpt { font-size:14px; line-height:1.7; color:#fff; opacity:.65; margin-bottom:28px; }
+.blog-meta { font-size:12px; color:#fff; opacity:.4; letter-spacing:.08em; margin-bottom:28px; }
 .read-more { font-size:11px; letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:8px; color:#fff; font-weight:600; }
 .read-more-arrow { transition:transform .2s; display:inline-block; }
-.blog-post-card:hover .read-more-arrow, .blog-featured:hover .read-more-arrow { transform:translateX(4px); }
+.blog-post-card:hover .read-more-arrow { transform:translateX(4px); }
 
+/* ── BLOG DETAIL ── */
 .blog-detail-hero { padding:160px 48px 80px; border-bottom:1px solid rgba(255,255,255,.2); display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end; }
 .blog-detail-body { padding:80px 48px 120px; display:grid; grid-template-columns:1fr 300px; gap:80px; align-items:start; }
-.blog-detail-content p { font-size:17px; line-height:1.8; color:#fff; margin-bottom:28px; }
+.blog-detail-content p { font-size:17px; line-height:1.8; color:#fff; margin-bottom:28px; opacity:.88; }
 .blog-detail-content h2 { font-size:28px; font-weight:800; letter-spacing:-.02em; margin:48px 0 16px; }
 .blog-sidebar { position:sticky; top:100px; }
 .sidebar-block { border-top:1px solid rgba(255,255,255,.2); padding-top:20px; margin-bottom:32px; }
@@ -181,21 +235,23 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
 </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-follower" id="cursorFollower"></div>
 
+<!-- ═══════════════════════════════════════════════════════════
+     NAV — logo + company name + nav links
+     ═══════════════════════════════════════════════════════════ -->
 <nav id="mainNav">
   <a class="nav-logo" onclick="navigate('home')">
-    <!-- ═══════════════════════════════════════════════════════════
-     LOGO MARK — Replace the <svg> below with your final logo
-     e.g. <img src="/logo.png" width="22" height="22" alt="JRXDev">
-     ═══════════════════════════════════════════════════════════ -->
-<div class="logo-mark">
-      <svg viewBox="0 0 24 24" fill="black" xmlns="JRXlogo.png" width="22" height="22">
-        <path d="M4 4h6v2H6v12h4v2H4V4zM14 4h6v16h-6v-2h4V6h-4V4zM10 10h4v4h-4z"/>
-      </svg>
+    <!-- ═══════════════════════════════════════════════════════
+         LOGO MARK — swap JRXlogo.png for your final logo file
+         File must be in the same folder as index.html
+         ═══════════════════════════════════════════════════════ -->
+    <div class="logo-mark">
+      <img src="JRXlogo.png" width="40" height="40" alt="JRXDev Logo">
     </div>
-    <!-- COMPANY NAME in nav — edit text below -->
+    <!-- COMPANY NAME — edit text below -->
     <span class="logo-text">JRXDev</span>
   </a>
   <ul class="nav-links">
@@ -205,24 +261,26 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
   </ul>
 </nav>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: HOME
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-home">
   <section class="home-hero">
     <div class="hero-left">
       <p class="hero-eyebrow">Software Development Studio</p>
-      <!-- ═══════════════════════════════════════════════════════════
-     HERO HEADLINE — Main homepage headline
-     ═══════════════════════════════════════════════════════════ -->
+      <!-- HERO HEADLINE — edit below -->
       <h1 class="hero-headline"><em>Human-focused</em><br>software for<br>a better world.</h1>
-      <!-- HERO BIO — Short company description on homepage -->
+      <!-- HERO BIO — edit below -->
       <p class="hero-bio">JRXDev is a software development company building the next generation of professional networking tools. We create technology that centers people — not algorithms — to foster genuine connection, opportunity, and societal progress.</p>
     </div>
     <div class="hero-right">
-      <!-- HOMEPAGE STATS — Edit the 3 numbers and labels below -->
-      <div><div class="stat-number">01</div><div class="stat-label">Active product in development</div></div>
+      <!-- HOMEPAGE STATS — edit numbers and labels below -->
+      <div><div class="stat-number">02</div><div class="stat-label">Projects in development</div></div>
       <div><div class="stat-number">∞</div><div class="stat-label">Commitment to human impact</div></div>
       <div><div class="stat-number">2026</div><div class="stat-label">Founded with purpose</div></div>
     </div>
   </section>
+
   <div class="marquee-section">
     <div class="marquee-track">
       <span class="marquee-item">Professional Networking <span class="marquee-dot"></span></span>
@@ -239,84 +297,195 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
       <span class="marquee-item">Better Technology <span class="marquee-dot"></span></span>
     </div>
   </div>
+
+  <!-- PROJECTS — edit titles, descriptions, and tags below -->
   <section class="working-on">
     <div class="section-header">
       <span class="section-title">Current focus</span>
       <h2 class="section-heading">What we're working on</h2>
     </div>
     <div class="projects-grid">
-      <div class="project-card" onclick="navigate('work-nexusnet')"><p class="project-number">001</p><h3 class="project-name">NexusNet</h3><p class="project-desc">A professional networking platform redesigned from the ground up with human behavior at its core. No vanity metrics. No algorithmic noise. Just meaningful professional relationships.</p><span class="project-tag">In Development</span></div>
-      <div class="project-card" onclick="navigate('work-meridian')"><p class="project-number">002</p><h3 class="project-name">Meridian API</h3><p class="project-desc">Building scalable, privacy-first backend systems that put user data ownership at the forefront. Every architectural decision is made with people's trust in mind.</p><span class="project-tag">Architecture</span></div>
-      <div class="project-card" onclick="navigate('work-signal')"><p class="project-number">003</p><h3 class="project-name">Signal Design System</h3><p class="project-desc">Ongoing user research and interface design exploration to understand how professionals truly want to connect, collaborate, and grow in the modern era.</p><span class="project-tag">Research</span></div>
+      <div class="project-card" onclick="navigate('work-nexusnet')">
+        <p class="project-number">001</p>
+        <h3 class="project-name">NexusNet</h3>
+        <p class="project-desc">A professional networking platform redesigned from the ground up with human behavior at its core. No vanity metrics. No algorithmic noise. Just meaningful professional relationships.</p>
+        <span class="project-tag">In Development</span>
+      </div>
+      <div class="project-card" onclick="navigate('work-meridian')">
+        <p class="project-number">002</p>
+        <h3 class="project-name">Meridian API</h3>
+        <p class="project-desc">Building scalable, privacy-first backend systems that put user data ownership at the forefront. Every architectural decision is made with people's trust in mind.</p>
+        <span class="project-tag">Architecture</span>
+      </div>
     </div>
   </section>
+
   <section class="contact-section reveal">
     <p class="contact-label">Let's build something meaningful</p>
     <h2 class="contact-headline">Ready to connect with us?</h2>
+    <!-- CONTACT EMAIL — update address if it changes -->
     <a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a>
   </section>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
+
+  <footer>
+    <span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span>
+    <div class="footer-links">
+      <a onclick="navigate('works')">Works</a>
+      <a onclick="navigate('mission')">Mission</a>
+      <a onclick="navigate('blog')">Blog</a>
+      <!-- FOOTER EMAIL — update address if it changes -->
+      <a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a>
+    </div>
+  </footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: WORKS
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-works">
-  <section class="page-hero"><p class="page-hero-label">Portfolio</p><h1 class="page-hero-title">Our<br>Works.</h1></section>
+  <section class="page-hero">
+    <p class="page-hero-label">Portfolio</p>
+    <h1 class="page-hero-title">Our<br>Works.</h1>
+  </section>
+  <!-- WORKS LIST — add or remove .work-item blocks to update projects -->
   <div class="works-list">
-    <div class="work-item reveal" onclick="navigate('work-nexusnet')"><span class="work-num">01</span><div><div class="work-title">NexusNet</div><div class="work-subtitle">Professional networking platform reimagined for genuine human connection</div></div><span class="work-category">Mobile / Web App</span><span class="work-year">2026 &#8212; Ongoing</span></div>
-    <div class="work-item reveal" onclick="navigate('work-meridian')"><span class="work-num">02</span><div><div class="work-title">Meridian API</div><div class="work-subtitle">Privacy-first data infrastructure for developer ecosystems</div></div><span class="work-category">Backend / API</span><span class="work-year">2026 &#8212; Ongoing</span></div>
-    <div class="work-item reveal" onclick="navigate('work-signal')"><span class="work-num">03</span><div><div class="work-title">Signal Design System</div><div class="work-subtitle">Component library and design language for human-centered interfaces</div></div><span class="work-category">Design System</span><span class="work-year">2026</span></div>
-    <div class="work-item reveal" onclick="navigate('work-atlas')"><span class="work-num">04</span><div><div class="work-title">Atlas Onboarding</div><div class="work-subtitle">Frictionless user activation framework for professional platforms</div></div><span class="work-category">Product / UX</span><span class="work-year">2026</span></div>
-    <div class="work-item reveal" onclick="navigate('work-fieldwork')"><span class="work-num">05</span><div><div class="work-title">Fieldwork Research</div><div class="work-subtitle">Qualitative study on professional relationship patterns in distributed teams</div></div><span class="work-category">Research</span><span class="work-year">2026</span></div>
+    <div class="work-item reveal" onclick="navigate('work-nexusnet')">
+      <span class="work-num">01</span>
+      <div><div class="work-title">NexusNet</div><div class="work-subtitle">Professional networking platform reimagined for genuine human connection</div></div>
+      <span class="work-category">Mobile / Web App</span>
+      <span class="work-year">2026 &#8212; Ongoing</span>
+    </div>
+    <div class="work-item reveal" onclick="navigate('work-meridian')">
+      <span class="work-num">02</span>
+      <div><div class="work-title">Meridian API</div><div class="work-subtitle">Privacy-first data infrastructure for developer ecosystems</div></div>
+      <span class="work-category">Backend / API</span>
+      <span class="work-year">2026 &#8212; Ongoing</span>
+    </div>
   </div>
-  <section class="contact-section reveal"><p class="contact-label">Interested in working together?</p><h2 class="contact-headline">Let's create something great.</h2><a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a></section>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
+
+  <section class="contact-section reveal">
+    <p class="contact-label">Interested in working together?</p>
+    <h2 class="contact-headline">Let's create something great.</h2>
+    <a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a>
+  </section>
+  <footer>
+    <span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span>
+    <div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div>
+  </footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: WORK DETAIL — NexusNet
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-work-nexusnet">
-  <div class="detail-hero"><button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button><h1 class="detail-headline">NexusNet</h1><div class="detail-meta-row"><div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Mobile / Web App</div></div><div><div class="detail-meta-label">Status</div><div class="detail-meta-value">In Development</div></div><div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026 &#8212; Ongoing</div></div><div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Full-Stack Design &amp; Dev</div></div></div></div>
+  <div class="detail-hero">
+    <button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button>
+    <h1 class="detail-headline">NexusNet</h1>
+    <!-- WORK META — update category, status, timeline, role -->
+    <div class="detail-meta-row">
+      <div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Mobile / Web App</div></div>
+      <div><div class="detail-meta-label">Status</div><div class="detail-meta-value">In Development</div></div>
+      <div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026 &#8212; Ongoing</div></div>
+      <div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Full-Stack Design &amp; Dev</div></div>
+    </div>
+  </div>
   <div class="detail-image"><span class="detail-image-num">01</span><span class="detail-image-label">NexusNet &#8212; Professional Networking Platform</span></div>
-  <div class="detail-body"><p class="detail-section-label">Overview</p><p class="detail-section-text">NexusNet is JRXDev's flagship product &#8212; a professional networking platform built from first principles around human behavior, not engagement optimization. Where other platforms reward performance, NexusNet rewards genuine connection.</p><p class="detail-section-text">We started with a simple hypothesis: the reason people find professional networking exhausting is because existing tools have misaligned incentives. NexusNet is designed to invert those incentives entirely.</p><p class="detail-section-label">The Problem</p><h3 class="detail-section-h">Professional networking is broken.</h3><p class="detail-section-text">Over 18 months of user research, we interviewed more than 200 professionals across industries. The finding was consistent: people don't hate networking &#8212; they hate how current platforms make them feel. NexusNet is our answer.</p><p class="detail-section-label">Our Approach</p><p class="detail-section-text">NexusNet removes follower counts, algorithmic feeds, and vanity metrics entirely. Introductions require mutual opt-in. Every interaction is intentional.</p><div class="detail-tags"><span class="detail-tag">React Native</span><span class="detail-tag">Node.js</span><span class="detail-tag">PostgreSQL</span><span class="detail-tag">Human-Centered Design</span><span class="detail-tag">Privacy-First</span></div></div>
+  <!-- WORK BODY — edit copy, section labels, and tags below -->
+  <div class="detail-body">
+    <p class="detail-section-label">Overview</p>
+    <p class="detail-section-text">NexusNet is JRXDev's flagship product &#8212; a professional networking platform built from first principles around human behavior, not engagement optimization. Where other platforms reward performance, NexusNet rewards genuine connection.</p>
+    <p class="detail-section-text">We started with a simple hypothesis: the reason people find professional networking exhausting is because existing tools have misaligned incentives. NexusNet is designed to invert those incentives entirely.</p>
+    <p class="detail-section-label">The Problem</p>
+    <h3 class="detail-section-h">Professional networking is broken.</h3>
+    <p class="detail-section-text">Over 18 months of user research, we interviewed more than 200 professionals across industries. The finding was consistent: people don't hate networking &#8212; they hate how current platforms make them feel. NexusNet is our answer.</p>
+    <p class="detail-section-label">Our Approach</p>
+    <p class="detail-section-text">NexusNet removes follower counts, algorithmic feeds, and vanity metrics entirely. Introductions require mutual opt-in. Every interaction is intentional.</p>
+    <!-- TAGS — add/remove tags as needed -->
+    <div class="detail-tags">
+      <span class="detail-tag">React Native</span>
+      <span class="detail-tag">Node.js</span>
+      <span class="detail-tag">PostgreSQL</span>
+      <span class="detail-tag">Human-Centered Design</span>
+      <span class="detail-tag">Privacy-First</span>
+    </div>
+  </div>
   <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: WORK DETAIL — Meridian API
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-work-meridian">
-  <div class="detail-hero"><button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button><h1 class="detail-headline">Meridian API</h1><div class="detail-meta-row"><div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Backend / API</div></div><div><div class="detail-meta-label">Status</div><div class="detail-meta-value">In Development</div></div><div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026 &#8212; Ongoing</div></div><div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Architecture &amp; Engineering</div></div></div></div>
+  <div class="detail-hero">
+    <button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button>
+    <h1 class="detail-headline">Meridian API</h1>
+    <div class="detail-meta-row">
+      <div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Backend / API</div></div>
+      <div><div class="detail-meta-label">Status</div><div class="detail-meta-value">In Development</div></div>
+      <div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026 &#8212; Ongoing</div></div>
+      <div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Architecture &amp; Engineering</div></div>
+    </div>
+  </div>
   <div class="detail-image"><span class="detail-image-num">02</span><span class="detail-image-label">Meridian &#8212; Privacy-First Data Infrastructure</span></div>
-  <div class="detail-body"><p class="detail-section-label">Overview</p><p class="detail-section-text">Meridian is the backend infrastructure powering JRXDev's products. Built privacy-first from day one, it gives users real control over their data &#8212; genuine ownership and portability, not a checkbox illusion.</p><p class="detail-section-label">Architecture</p><h3 class="detail-section-h">Built for trust at every layer.</h3><p class="detail-section-text">Meridian uses end-to-end encryption for all sensitive user data with zero-knowledge architecture. Security is a design principle, not a feature bolted on afterward.</p><div class="detail-tags"><span class="detail-tag">Go</span><span class="detail-tag">PostgreSQL</span><span class="detail-tag">Redis</span><span class="detail-tag">End-to-End Encryption</span><span class="detail-tag">Zero-Knowledge</span></div></div>
+  <div class="detail-body">
+    <p class="detail-section-label">Overview</p>
+    <p class="detail-section-text">Meridian is the backend infrastructure powering JRXDev's products. Built privacy-first from day one, it gives users real control over their data &#8212; genuine ownership and portability, not a checkbox illusion.</p>
+    <p class="detail-section-label">Architecture</p>
+    <h3 class="detail-section-h">Built for trust at every layer.</h3>
+    <p class="detail-section-text">Meridian uses end-to-end encryption for all sensitive user data with zero-knowledge architecture. Security is a design principle, not a feature bolted on afterward.</p>
+    <div class="detail-tags">
+      <span class="detail-tag">Go</span>
+      <span class="detail-tag">PostgreSQL</span>
+      <span class="detail-tag">Redis</span>
+      <span class="detail-tag">End-to-End Encryption</span>
+      <span class="detail-tag">Zero-Knowledge</span>
+    </div>
+  </div>
   <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
 </div>
 
-<div class="page" id="page-work-signal">
-  <div class="detail-hero"><button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button><h1 class="detail-headline">Signal Design System</h1><div class="detail-meta-row"><div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Design System</div></div><div><div class="detail-meta-label">Status</div><div class="detail-meta-value">v1.0 Released</div></div><div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026</div></div><div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Design &amp; Front-End</div></div></div></div>
-  <div class="detail-image"><span class="detail-image-num">03</span><span class="detail-image-label">Signal &#8212; Component Library &amp; Design Language</span></div>
-  <div class="detail-body"><p class="detail-section-label">Overview</p><p class="detail-section-text">Signal is JRXDev's internal design system encoding our human-centered philosophy into reusable, accessible UI components, tokens, and patterns. Every component meets WCAG 2.2 AA standards.</p><p class="detail-section-label">Design Philosophy</p><h3 class="detail-section-h">Interfaces that get out of the way.</h3><p class="detail-section-text">Signal's design language is deliberately restrained &#8212; aggressive whitespace, limited palette, typography over decoration. Interfaces that feel calm, purposeful, and frictionless.</p><div class="detail-tags"><span class="detail-tag">React</span><span class="detail-tag">TypeScript</span><span class="detail-tag">Storybook</span><span class="detail-tag">WCAG 2.2 AA</span><span class="detail-tag">Design Tokens</span></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-work-atlas">
-  <div class="detail-hero"><button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button><h1 class="detail-headline">Atlas Onboarding</h1><div class="detail-meta-row"><div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Product / UX</div></div><div><div class="detail-meta-label">Status</div><div class="detail-meta-value">Completed</div></div><div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026</div></div><div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Product Design &amp; Strategy</div></div></div></div>
-  <div class="detail-image"><span class="detail-image-num">04</span><span class="detail-image-label">Atlas &#8212; Frictionless Onboarding Framework</span></div>
-  <div class="detail-body"><p class="detail-section-label">Overview</p><p class="detail-section-text">Atlas is JRXDev's user onboarding framework, designed to reach first value as quickly and honestly as possible. No dark patterns, no misleading progress bars, no manufactured urgency.</p><p class="detail-section-label">Results</p><h3 class="detail-section-h">Honest onboarding that actually converts.</h3><p class="detail-section-text">In internal testing, Atlas outperformed our previous approach on both completion rate and 30-day retention. When users feel respected during onboarding, they are more likely to return.</p><div class="detail-tags"><span class="detail-tag">UX Research</span><span class="detail-tag">Prototyping</span><span class="detail-tag">A/B Testing</span><span class="detail-tag">Ethical Design</span></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-work-fieldwork">
-  <div class="detail-hero"><button class="detail-back" onclick="navigate('works')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Works</button><h1 class="detail-headline">Fieldwork Research</h1><div class="detail-meta-row"><div><div class="detail-meta-label">Category</div><div class="detail-meta-value">Research</div></div><div><div class="detail-meta-label">Status</div><div class="detail-meta-value">Published</div></div><div><div class="detail-meta-label">Timeline</div><div class="detail-meta-value">2026</div></div><div><div class="detail-meta-label">Role</div><div class="detail-meta-value">Research Lead</div></div></div></div>
-  <div class="detail-image"><span class="detail-image-num">05</span><span class="detail-image-label">Fieldwork &#8212; Qualitative Research Study</span></div>
-  <div class="detail-body"><p class="detail-section-label">Overview</p><p class="detail-section-text">Fieldwork is JRXDev's foundational research study on professional relationship patterns in distributed work environments. Conducted over six months with 200+ participants across 14 industries.</p><p class="detail-section-label">Key Findings</p><h3 class="detail-section-h">What we learned about how people really connect.</h3><p class="detail-section-text">People crave professional connection but resist the formats current platforms impose. They want to be known for their work and judgment, not their posting frequency. Introductions with context lead to real relationships.</p><div class="detail-tags"><span class="detail-tag">Qualitative Research</span><span class="detail-tag">Interviews</span><span class="detail-tag">Diary Studies</span><span class="detail-tag">Product Strategy</span></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: MISSION
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-mission">
   <section class="mission-hero">
-    <div><p class="page-hero-label">Our purpose</p><h1 style="font-size:clamp(48px,6vw,96px);font-weight:800;letter-spacing:-.04em;line-height:.92;">Our<br>Mission.</h1></div>
-    <div><p style="font-size:20px;line-height:1.65;color:#fff;max-width:520px;">We believe technology should serve humanity &#8212; not the other way around. JRXDev builds software that amplifies human potential, fosters authentic connection, and creates lasting positive change in society.</p></div>
+    <div>
+      <p class="page-hero-label">Our purpose</p>
+      <h1 style="font-size:clamp(48px,6vw,96px);font-weight:800;letter-spacing:-.04em;line-height:.92;">Our<br>Mission.</h1>
+    </div>
+    <!-- MISSION INTRO — edit below -->
+    <div>
+      <p style="font-size:20px;line-height:1.65;color:#fff;max-width:520px;opacity:.85;">We believe technology should serve humanity &#8212; not the other way around. JRXDev builds software that amplifies human potential, fosters authentic connection, and creates lasting positive change in society.</p>
+    </div>
   </section>
+  <!-- MISSION CELLS — edit the three content blocks below -->
   <div class="mission-content">
-    <div class="mission-block reveal"><div class="mission-cell"><p class="mission-cell-label">The problem</p><h3 class="mission-cell-title">Technology has drifted from its purpose.</h3><p class="mission-cell-text">Modern platforms optimize for engagement over impact. They measure success in minutes spent, not lives improved. We are building a different kind of software company &#8212; one accountable to human outcomes above all else.</p></div><div class="mission-cell"><p class="mission-cell-label">Our approach</p><h3 class="mission-cell-title">Design for people, not metrics.</h3><p class="mission-cell-text">Every product decision at JRXDev begins with a single question: does this make life better for a real person? We reject dark patterns, manipulative design, and engagement-bait. Our north star is genuine human value.</p></div></div>
-    <div class="mission-block reveal"><div class="mission-cell" style="grid-column:1/-1;"><p class="mission-cell-label">The vision</p><h3 class="mission-cell-title" style="font-size:clamp(28px,3vw,44px);max-width:800px;">A world where software is a force for connection, opportunity, and collective flourishing.</h3></div></div>
+    <div class="mission-block reveal">
+      <div class="mission-cell">
+        <p class="mission-cell-label">The problem</p>
+        <h3 class="mission-cell-title">Technology has drifted from its purpose.</h3>
+        <p class="mission-cell-text">Modern platforms optimize for engagement over impact. They measure success in minutes spent, not lives improved. We are building a different kind of software company &#8212; one accountable to human outcomes above all else.</p>
+      </div>
+      <div class="mission-cell">
+        <p class="mission-cell-label">Our approach</p>
+        <h3 class="mission-cell-title">Design for people, not metrics.</h3>
+        <p class="mission-cell-text">Every product decision at JRXDev begins with a single question: does this make life better for a real person? We reject dark patterns, manipulative design, and engagement-bait. Our north star is genuine human value.</p>
+      </div>
+    </div>
+    <div class="mission-block reveal">
+      <div class="mission-cell" style="grid-column:1/-1;">
+        <p class="mission-cell-label">The vision</p>
+        <h3 class="mission-cell-title" style="font-size:clamp(28px,3vw,44px);max-width:800px;">A world where software is a force for connection, opportunity, and collective flourishing.</h3>
+      </div>
+    </div>
   </div>
+
+  <!-- CORE VALUES — edit icon, title, and text for each value -->
   <section class="values-section reveal">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:32px;"><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;">What guides us</span><h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.02em;">Core values</h2></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:32px;">
+      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.4;">What guides us</span>
+      <h2 style="font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.02em;">Core values</h2>
+    </div>
     <div class="values-grid">
       <div class="value-item"><div class="value-icon">&#9678;</div><h4 class="value-title">Human First</h4><p class="value-text">Every line of code, every design decision, every product choice begins and ends with real human impact.</p></div>
       <div class="value-item"><div class="value-icon">&#9672;</div><h4 class="value-title">Radical Transparency</h4><p class="value-text">We operate openly &#8212; with our users, our community, and each other. No hidden agendas, no opaque algorithms.</p></div>
@@ -324,70 +493,142 @@ footer { padding:40px 48px; border-top:1px solid rgba(255,255,255,.2); display:f
       <div class="value-item"><div class="value-icon">&#9675;</div><h4 class="value-title">Long-term Thinking</h4><p class="value-text">We make decisions for the next decade, not the next quarter. Sustainable, meaningful impact requires patience.</p></div>
     </div>
   </section>
-  <section class="contact-section reveal"><p class="contact-label">Aligned with our mission?</p><h2 class="contact-headline">Let's talk about the future.</h2><a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a></section>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
+
+  <section class="contact-section reveal">
+    <p class="contact-label">Aligned with our mission?</p>
+    <h2 class="contact-headline">Let's talk about the future.</h2>
+    <a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a>
+  </section>
+  <footer>
+    <span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span>
+    <div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div>
+  </footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: BLOG
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-blog">
-  <section class="page-hero"><p class="page-hero-label">Thoughts &amp; Perspectives</p><h1 class="page-hero-title">The<br>Blog.</h1></section>
+  <section class="page-hero">
+    <p class="page-hero-label">Thoughts &amp; Perspectives</p>
+    <h1 class="page-hero-title">The<br>Blog.</h1>
+  </section>
+  <!-- BLOG CARDS — add new .blog-post-card blocks to add posts -->
   <div class="blog-grid">
-    <div class="blog-featured reveal" onclick="navigate('blog-networking')"><div class="blog-featured-content"><p class="blog-tag">Featured</p><h2 class="blog-post-title">Why professional networking is broken &#8212; and how we plan to fix it</h2><p class="blog-post-excerpt">The modern professional network has become a performance stage. This is our manifesto for building something different.</p><div class="blog-meta"><span>JRXDev Team</span><span>&#8212;</span><span>March 2026</span><span>&#8212;</span><span>8 min read</span></div><div class="read-more" style="margin-top:28px;">Read article <span class="read-more-arrow">&#8594;</span></div></div><div class="blog-featured-image"><span class="blog-featured-image-text">01</span></div></div>
     <div class="blog-posts-list">
-      <div class="blog-post-card reveal" onclick="navigate('blog-trust')"><p class="blog-tag" style="margin-bottom:8px;">Design</p><h3 class="blog-card-title">Designing for trust: the anti-dark-pattern playbook</h3><p class="blog-card-excerpt">The design principles we use to build software people trust &#8212; and why this is the only sustainable path forward.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
-      <div class="blog-post-card reveal" onclick="navigate('blog-privacy')"><p class="blog-tag" style="margin-bottom:8px;">Engineering</p><h3 class="blog-card-title">Privacy-first architecture: building for data ownership</h3><p class="blog-card-excerpt">How we structure our backend to give users genuine control over their data from day one.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
-      <div class="blog-post-card reveal" onclick="navigate('blog-interviews')"><p class="blog-tag" style="margin-bottom:8px;">Research</p><h3 class="blog-card-title">What 200 interviews taught us about professional connection</h3><p class="blog-card-excerpt">Findings from our foundational user research study reshaping NexusNet's core features.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
-      <div class="blog-post-card reveal" onclick="navigate('blog-culture')"><p class="blog-tag" style="margin-bottom:8px;">Culture</p><h3 class="blog-card-title">Building a company culture that actually lives its values</h3><p class="blog-card-excerpt">The intentional steps we have taken to build a team that reflects our human-centered philosophy.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
-      <div class="blog-post-card reveal" onclick="navigate('blog-metrics')"><p class="blog-tag" style="margin-bottom:8px;">Product</p><h3 class="blog-card-title">The metrics we chose not to track &#8212; and why</h3><p class="blog-card-excerpt">The vanity metrics we deliberately excluded from our dashboards, and what we measure instead.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
-      <div class="blog-post-card reveal" onclick="navigate('blog-2030')"><p class="blog-tag" style="margin-bottom:8px;">Vision</p><h3 class="blog-card-title">Where we see professional software in 2030</h3><p class="blog-card-excerpt">A forward-looking perspective on how professional tools will evolve and the role JRXDev will play.</p><div class="read-more">Read more <span class="read-more-arrow">&#8594;</span></div></div>
+      <div class="blog-post-card reveal" onclick="navigate('blog-networking')">
+        <p class="blog-tag">Product</p>
+        <div class="blog-meta">JRXDev Team &#183; March 2026 &#183; 8 min read</div>
+        <h3 class="blog-card-title">Why professional networking is broken &#8212; and how we plan to fix it</h3>
+        <p class="blog-card-excerpt">The modern professional network has become a performance stage. This is our manifesto for building something different.</p>
+        <div class="read-more">Read article <span class="read-more-arrow">&#8594;</span></div>
+      </div>
+      <div class="blog-post-card reveal" onclick="navigate('blog-trust')">
+        <p class="blog-tag">Design</p>
+        <div class="blog-meta">JRXDev Design Team &#183; March 2026 &#183; 6 min read</div>
+        <h3 class="blog-card-title">Designing for trust: the anti-dark-pattern playbook</h3>
+        <p class="blog-card-excerpt">The design principles we use to build software people trust &#8212; and why it's the only sustainable path forward.</p>
+        <div class="read-more">Read article <span class="read-more-arrow">&#8594;</span></div>
+      </div>
     </div>
   </div>
-  <section class="contact-section reveal"><p class="contact-label">Have a story idea or feedback?</p><h2 class="contact-headline">We'd love to hear from you.</h2><a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a></section>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
+
+  <section class="contact-section reveal">
+    <p class="contact-label">Have a story idea or feedback?</p>
+    <h2 class="contact-headline">We'd love to hear from you.</h2>
+    <a href="mailto:contact@jrxdev.com" class="contact-btn"><span>Contact Us</span><span class="btn-arrow">&#8594;</span></a>
+  </section>
+  <footer>
+    <span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span>
+    <div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div>
+  </footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: BLOG POST — Networking
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-blog-networking">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Featured &#183; March 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Why professional networking is broken &#8212; and how we plan to fix it</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">The modern professional network has become a performance stage. This is our manifesto.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Team</span><span>8 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>There is a specific feeling that most professionals know well: the hollow sensation after spending twenty minutes crafting a post for a professional networking site, hitting publish, watching the likes roll in, and feeling nothing. Maybe worse than nothing.</p><p>We have talked to hundreds of people about this. The response is always the same. "I hate LinkedIn but I have to use it." "It makes me feel like I am performing my career rather than having one."</p><h2>The incentive problem</h2><p>The root cause is not the people using these platforms. It is the platforms themselves. Professional networking tools have been built around maximizing time on site, content creation, and social pressure. These incentives directly conflict with what professionals actually want.</p><h2>What NexusNet is doing differently</h2><p>NexusNet has no feed, no follower count, no algorithmic ranking. Instead it surfaces relevant connections based on what you are actually working on and who you know in common. Introductions require mutual opt-in.</p><h2>This is our manifesto</h2><p>We are building NexusNet for the professional who is tired of performing. Who wants to build genuine relationships and find real opportunities without the ambient pressure of every other platform in this space.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Team</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">March 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">8 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Product</span><span class="sidebar-tag">Vision</span><span class="sidebar-tag">NexusNet</span></div></div></div></div>
+  <div class="blog-detail-hero">
+    <div>
+      <button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button>
+      <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Product &#183; March 2026</p>
+      <!-- BLOG POST TITLE — edit below -->
+      <h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Why professional networking is broken &#8212; and how we plan to fix it</h1>
+    </div>
+    <div>
+      <p style="font-size:18px;line-height:1.7;color:#fff;opacity:.85;">The modern professional network has become a performance stage. This is our manifesto for building something different.</p>
+      <div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Team</span><span>8 min read</span></div>
+    </div>
+  </div>
+  <!-- BLOG POST BODY — edit paragraphs and headings below -->
+  <div class="blog-detail-body">
+    <div class="blog-detail-content">
+      <p>There is a specific feeling that most professionals know well: the hollow sensation after spending twenty minutes crafting a post for a professional networking site, hitting publish, watching the likes roll in, and feeling nothing. Maybe worse than nothing.</p>
+      <p>We have talked to hundreds of people about this. The response is always the same. "I hate LinkedIn but I have to use it." "It makes me feel like I am performing my career rather than having one."</p>
+      <h2>The incentive problem</h2>
+      <p>The root cause is not the people using these platforms. It is the platforms themselves. Professional networking tools have been built around maximizing time on site, content creation, and social pressure. These incentives are in direct conflict with what professionals actually want.</p>
+      <h2>What NexusNet is doing differently</h2>
+      <p>NexusNet has no feed, no follower count, no algorithmic ranking. Instead it surfaces relevant connections based on what you are actually working on and who you know in common. Introductions require mutual opt-in. Every interaction is intentional.</p>
+      <h2>This is our manifesto</h2>
+      <p>We are building NexusNet for the professional who is tired of performing. Who wants to build genuine relationships and find real opportunities without the ambient pressure and performative exhaustion of every other platform in this space.</p>
+    </div>
+    <div class="blog-sidebar">
+      <div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Team</div></div>
+      <div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">March 2026</div></div>
+      <div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">8 minutes</div></div>
+      <!-- SIDEBAR TAGS — update as needed -->
+      <div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Product</span><span class="sidebar-tag">Vision</span><span class="sidebar-tag">NexusNet</span></div></div>
+    </div>
+  </div>
   <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════════════════
+     PAGE: BLOG POST — Trust
+     ═══════════════════════════════════════════════════════════════════ -->
 <div class="page" id="page-blog-trust">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Design &#183; March 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Designing for trust: the anti-dark-pattern playbook</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">The design principles we use to build software people trust.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Design</span><span>6 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>Dark patterns are everywhere. Subscription cancellations hidden behind seven screens. Consent dialogs where "Accept All" is large and obvious while "Manage Preferences" is small and confusing. We have built a list of every dark pattern we have encountered and use it as a checklist of things to actively avoid.</p><h2>Principle 1: Clarity is a feature</h2><p>Every interface decision that requires the user to think harder than necessary is a small trust withdrawal. We treat clarity as a core product feature. Every label is tested for comprehension. Every destructive action requires confirmation.</p><h2>Principle 2: The honest empty state</h2><p>When we have not earned anything to show you yet, we say so directly and tell you exactly what to do next. No manufactured social proof, no fake urgency.</p><h2>Principle 3: Make leaving easy</h2><p>NexusNet has one-click account deletion that is prominent, immediate, and permanent. We believe this is the right thing to do &#8212; and it also makes people more comfortable staying.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Design</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">March 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">6 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Design</span><span class="sidebar-tag">Ethics</span><span class="sidebar-tag">UX</span></div></div></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-blog-privacy">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Engineering &#183; February 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Privacy-first architecture: building for data ownership</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">How we structure backend systems to give users genuine control over their data from day one.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Engineering</span><span>10 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>Most companies treat privacy as a compliance exercise. We made a different choice: privacy is a first-class architectural constraint, not a feature added later.</p><h2>Data minimization in practice</h2><p>Our rule: if we cannot articulate a specific, near-term use case for a piece of data, we do not collect it. This means a smaller attack surface, simpler compliance obligations, and users who trust us with the data we do collect.</p><h2>Zero-knowledge architecture</h2><p>For genuinely sensitive data, we use zero-knowledge architecture. Data is encrypted client-side before reaching our servers. JRXDev cannot read it. This is the only honest way to promise users that their private data is private.</p><h2>The deletion problem</h2><p>Most "delete account" implementations retain data for months. We implemented real deletion: when you delete your account, a cascade of deletion jobs runs across every system. When it is done, it is genuinely done.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Engineering</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">February 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">10 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Engineering</span><span class="sidebar-tag">Privacy</span><span class="sidebar-tag">Architecture</span></div></div></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-blog-interviews">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Research &#183; February 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">What 200 interviews taught us about professional connection</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">Findings from our foundational user research study reshaping NexusNet's core features.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Research</span><span>7 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>Over six months, we spoke with more than 200 professionals across 14 industries. We came in with hypotheses. Most of them were wrong.</p><h2>Finding 1: People don't hate networking. They hate the format.</h2><p>Almost universally, participants valued professional relationships but expressed frustration with the platforms meant to facilitate those connections. The problem is not connection itself &#8212; it is the awkward, performative format platforms impose on it.</p><h2>Finding 2: The best introductions come with context.</h2><p>The most valuable professional introductions always included specific details about why these two people should meet. Cold introductions rarely led anywhere. This directly shaped NexusNet's introduction feature.</p><h2>Finding 3: Visibility pressure is exhausting.</h2><p>The pressure to maintain visibility on professional platforms was actively harming participants' relationships with their own work. We are building something that inverts this entirely.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Research</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">February 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">7 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Research</span><span class="sidebar-tag">NexusNet</span><span class="sidebar-tag">Product</span></div></div></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-blog-culture">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Culture &#183; January 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Building a company culture that actually lives its values</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">The intentional steps we have taken to build a team that reflects our human-centered philosophy.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Team</span><span>5 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>It is easy to write values on a wall. It is much harder to make decisions that reflect those values when they conflict with convenience, speed, or short-term gain.</p><h2>Hiring for values alignment</h2><p>Every person we have brought onto JRXDev has been evaluated not just on their technical abilities, but on whether they genuinely share our belief that software should serve people. We have passed on highly skilled candidates who seemed motivated primarily by building impressive technology rather than its impact.</p><h2>Decision-making that centers impact</h2><p>We have implemented a simple practice for every significant decision: before finalizing, we ask who does this help and is it actually helping them? Making it explicit has caught several decisions that would have been made automatically without that check.</p><h2>Accountability without punishment</h2><p>We build a culture where mistakes are examined, not hidden. When something goes wrong, we do a genuine retrospective and publish findings internally. The goal is to learn.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Team</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">January 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">5 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Culture</span><span class="sidebar-tag">Team</span><span class="sidebar-tag">Values</span></div></div></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-blog-metrics">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Product &#183; January 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">The metrics we chose not to track &#8212; and why</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">The vanity metrics we deliberately excluded, and what we measure instead.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Product</span><span>6 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>What you measure shapes what you build. A product team optimizing for daily active users will build very different features than one optimizing for reported satisfaction.</p><h2>What we don't track: time on app</h2><p>Time on app is the canonical vanity metric. It is easy to juice with more notifications and feed content. We do not track it because optimizing for it would directly conflict with what we are building. NexusNet should be useful quickly and then get out of your way.</p><h2>What we don't track: follower counts</h2><p>NexusNet does not have follower counts visible to users, and we do not track them internally. The number of people who followed a profile tells us almost nothing about whether that person is getting value from the platform.</p><h2>What we do track: connection quality</h2><p>We survey users about whether connections made through NexusNet have been valuable. We track introductions that lead to subsequent conversation. We track whether users report finding opportunities. These metrics are harder to game and directly correspond to the value we are trying to create.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Product</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">January 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">6 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Product</span><span class="sidebar-tag">Metrics</span><span class="sidebar-tag">Strategy</span></div></div></div></div>
-  <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
-</div>
-
-<div class="page" id="page-blog-2030">
-  <div class="blog-detail-hero"><div><button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button><p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Vision &#183; January 2026</p><h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Where we see professional software in 2030</h1></div><div><p style="font-size:18px;line-height:1.7;color:#fff;">A forward-looking perspective on how professional tools will evolve and the role JRXDev intends to play.</p><div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Team</span><span>9 min read</span></div></div></div>
-  <div class="blog-detail-body"><div class="blog-detail-content"><p>Predicting the future of software is a fool's game, and we are going to do it anyway &#8212; with the caveat that we are more interested in the future we want to build than the one current trends suggest.</p><h2>The backlash to attention economics is underway</h2><p>The awareness of manipulative design patterns, the fatigue with notification-driven products, the growing preference for tools that respect your time &#8212; these trends are real and accelerating. By 2030, products built on attention extraction will face significant headwinds from users and regulation alike.</p><h2>Professional tools will become more context-aware</h2><p>The next generation of professional software will surface relevant connections and opportunities based on what you are actually trying to accomplish. NexusNet is building toward this: connection recommendations based on your current projects, not your past activity.</p><h2>The future JRXDev is building toward</h2><p>By 2030, we want JRXDev to be known as the company that proved you could build great, profitable software by taking users seriously. That being genuinely useful is a better business model than being addictive. We are early. We are small. But we believe the direction is right.</p></div><div class="blog-sidebar"><div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Team</div></div><div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">January 2026</div></div><div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">9 minutes</div></div><div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Vision</span><span class="sidebar-tag">Future</span><span class="sidebar-tag">Strategy</span></div></div></div></div>
+  <div class="blog-detail-hero">
+    <div>
+      <button class="detail-back" onclick="navigate('blog')"><span class="detail-back-arrow">&#8592;</span>&nbsp;All Posts</button>
+      <p style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.5;margin-bottom:20px;">Design &#183; March 2026</p>
+      <h1 style="font-size:clamp(36px,4.5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:1.0;">Designing for trust: the anti-dark-pattern playbook</h1>
+    </div>
+    <div>
+      <p style="font-size:18px;line-height:1.7;color:#fff;opacity:.85;">The design principles we use to build software people trust &#8212; and why it's the only sustainable path forward.</p>
+      <div style="margin-top:32px;display:flex;gap:32px;font-size:12px;color:#fff;opacity:.5;letter-spacing:.08em;"><span>JRXDev Design Team</span><span>6 min read</span></div>
+    </div>
+  </div>
+  <div class="blog-detail-body">
+    <div class="blog-detail-content">
+      <p>Dark patterns are everywhere. Subscription cancellations hidden behind seven screens. Consent dialogs where "Accept All" is large and obvious while "Manage Preferences" is small and confusing. Pre-checked boxes. Countdown timers on decisions that don't need to be urgent.</p>
+      <h2>Principle 1: Clarity is a feature</h2>
+      <p>Every interface decision that requires the user to think harder than necessary is a small trust withdrawal. Enough small withdrawals and users stop trusting the product entirely, even if they can't articulate why. We treat clarity as a core product feature &#8212; not a nice-to-have.</p>
+      <h2>Principle 2: The honest empty state</h2>
+      <p>When we have not earned anything to show you yet, we say so directly and tell you exactly what to do next. No manufactured social proof, no fake urgency, no pre-populated content designed to look like activity.</p>
+      <h2>Principle 3: Make leaving easy</h2>
+      <p>NexusNet has one-click account deletion that is prominent, immediate, and permanent. We believe this is the right thing to do &#8212; and it also makes people more comfortable staying.</p>
+    </div>
+    <div class="blog-sidebar">
+      <div class="sidebar-block"><div class="sidebar-label">Author</div><div class="sidebar-value">JRXDev Design Team</div></div>
+      <div class="sidebar-block"><div class="sidebar-label">Published</div><div class="sidebar-value">March 2026</div></div>
+      <div class="sidebar-block"><div class="sidebar-label">Read time</div><div class="sidebar-value">6 minutes</div></div>
+      <div class="sidebar-block"><div class="sidebar-label">Tags</div><div style="margin-top:8px;"><span class="sidebar-tag">Design</span><span class="sidebar-tag">Ethics</span><span class="sidebar-tag">UX</span></div></div>
+    </div>
+  </div>
   <footer><span class="footer-copy">&#169; JRXDev 2026. All rights reserved.</span><div class="footer-links"><a onclick="navigate('works')">Works</a><a onclick="navigate('mission')">Mission</a><a onclick="navigate('blog')">Blog</a><a href="mailto:contact@jrxdev.com">contact@jrxdev.com</a></div></footer>
 </div>
 
 <script>
+// ─────────────────────────────────────────────────────────────────────
+// NAVIGATION & URL ROUTING
+// Uses hash-based URLs compatible with GitHub Pages.
+// Home has no hash. All other pages use #page-name.
+//
+// To add a new page:
+//   1. Add <div class="page" id="page-yourname"> section in the HTML
+//   2. Add a link/button calling navigate('yourname')
+//   No other JS changes needed.
+// ─────────────────────────────────────────────────────────────────────
 function navigate(pageName, addToHistory) {
   if (addToHistory === undefined) addToHistory = true;
   var pages = document.querySelectorAll('.page');
@@ -401,7 +642,10 @@ function navigate(pageName, addToHistory) {
   var navEl = document.getElementById('nav-' + root);
   if (navEl) navEl.classList.add('active');
   if (addToHistory) {
-    try { history.pushState({ page: pageName }, '', '#' + pageName); } catch(e) {}
+    try {
+      var url = pageName === 'home' ? location.pathname : ('#' + pageName);
+      history.pushState({ page: pageName }, '', url);
+    } catch(e) {}
   }
   window.scrollTo(0, 0);
   setTimeout(initReveal, 80);
@@ -409,7 +653,7 @@ function navigate(pageName, addToHistory) {
 }
 
 window.addEventListener('popstate', function(e) {
-  var page = (e.state && e.state.page) ? e.state.page : (location.hash.replace('#','') || 'home');
+  var page = (e.state && e.state.page) ? e.state.page : (location.hash.replace('#', '') || 'home');
   navigate(page, false);
 });
 
@@ -419,6 +663,7 @@ window.addEventListener('popstate', function(e) {
   navigate(page, false);
 })();
 
+// ── CURSOR ──
 var cursor = document.getElementById('cursor');
 var follower = document.getElementById('cursorFollower');
 var mx = 0, my = 0, fx = 0, fy = 0;
@@ -438,7 +683,7 @@ document.addEventListener('mousemove', function(e) {
 })();
 
 function bindCursorHovers() {
-  var els = document.querySelectorAll('a, button, .project-card, .work-item, .blog-post-card, .blog-featured');
+  var els = document.querySelectorAll('a, button, .project-card, .work-item, .blog-post-card');
   for (var i = 0; i < els.length; i++) {
     els[i].onmouseenter = function() { cursor.style.width='5px'; cursor.style.height='5px'; follower.style.width='54px'; follower.style.height='54px'; };
     els[i].onmouseleave = function() { cursor.style.width='12px'; cursor.style.height='12px'; follower.style.width='40px'; follower.style.height='40px'; };
@@ -446,10 +691,12 @@ function bindCursorHovers() {
 }
 bindCursorHovers();
 
+// ── NAV SCROLL BORDER ──
 window.addEventListener('scroll', function() {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
 });
 
+// ── SCROLL REVEAL ──
 function initReveal() {
   var els = document.querySelectorAll('.page.active .reveal');
   for (var i = 0; i < els.length; i++) els[i].classList.remove('visible');
